@@ -1,16 +1,17 @@
-<script>
-	let props = $props();
+<script lang="ts">
+	let { audioBind=$bindable(), audioSrc, buttonClick, buttonText } = $props();
 </script>
 
-<button {...props}>
-	POP
+<audio bind:this={audioBind} src={audioSrc}></audio>
+<button onclick={() => { setTimeout(buttonClick, 10); speechSynthesis.speak(new SpeechSynthesisUtterance(buttonText)); }}>
+	{buttonText}
 </button>
 
 <style>
 	button {
 		font-size: 1.4em;
-		width: 6em;
-		height: 6em;
+		width: 5em;
+		height: 5em;
 		border-radius: 75%;
 		background: radial-gradient(circle at 25% 25%, hsl(0, 100%, 50%) 0, hsl(0, 100%, 40%) 100%);
 		box-shadow: 0 8px 0 hsl(0, 100%, 30%), 2px 12px 10px rgba(0,0,0,.35);
@@ -20,6 +21,7 @@
 		letter-spacing: 0.05em;
 		transform: translate(0, -8px);
 		transition: all 0.2s;
+		text-align: center;
 	}
 
 	button:active {
